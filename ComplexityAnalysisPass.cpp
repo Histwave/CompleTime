@@ -328,29 +328,3 @@ PreservedAnalyses ComplexityAnalysisPass::run(Module &M, ModuleAnalysisManager &
   // 本 Pass 只读分析，不修改 IR
   return PreservedAnalyses::all();
 }
-
-// PassPlugin 注册（LLVM 20 插件接口）
-llvm::PassPluginLibraryInfo getComplexityAnalysisPassPluginInfo() {
-  return {
-    LLVM_PLUGIN_API_VERSION,
-    "ComplexityAnalysisPass",
-    LLVM_VERSION_STRING,
-    [](PassBuilder &PB) {
-      // 注册为模块级 Pass，可通过 -passes= 调用
-      PB.registerPipelineParsingCallback(
-          [](StringRef Name, ModulePassManager &MPM,
-             ArrayRef<PassBuilder::PipelineElement>) {
-            if (Name == "complexity-analysis") {
-              MPM.addPass(ComplexityAnalysisPass());
-              return true;
-            }
-            return false;
-          });
-    }
-  };
-}
-
-extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo
-llvmGetPassPluginInfo() {
-  return getComplexityAnalysisPassPluginInfo();
-}
