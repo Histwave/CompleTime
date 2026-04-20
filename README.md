@@ -20,7 +20,7 @@ CompleTime/
 ├── ctllvm.cpp                  # CT-LLVM：常数时间污点分析 Pass
 ├── ComplexityAnalysisPass.cpp  # 复杂度分析 Pass 实现
 ├── ComplexityAnalysisPass.h    # 复杂度分析 Pass 头文件
-├── main.c                      # CT 分析的最小测试样例
+├── main.c                      # pass的最小测试样例
 ├── compile.bash                # 构建脚本：编译插件并在 main.c 上运行测试
 ├── extract_bitcode.py          # 工具脚本：从二进制文件中提取 LLVM 位码
 ├── LICENSE.txt                 # Apache 2.0 许可证
